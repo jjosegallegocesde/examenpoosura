@@ -1,27 +1,30 @@
 package org.example.modelos;
 
+import org.example.validaciones.ValidacionSeguro;
+
 import java.time.LocalDate;
 
 public class Seguro {
 
     // Atributos
-     String nombreAsegurado
-     int edadAsegurado;
-     String beneficiario
-     double montoCobertura
-     string tipoPoliza
-     int duracionPoliza;
-     boolean fumador;
-     boolean enfermedadesPreexistentes;
-     string compañiaSeguros;
+    private String nombreAsegurado;
+    private int edadAsegurado;
+    private String beneficiario;
+    private double montoCobertura;
+    private String tipoPoliza;
+    private int duracionPoliza;
+    private boolean fumador;
+    private boolean enfermedadesPreexistentes;
+    private String compañiaSeguros;
 
-     LocalDate fechaInicioCobertura;
-     string numeroPoliza
+    private LocalDate fechaInicioCobertura;
+    private String numeroPoliza;
 
+    private ValidacionSeguro validacionSeguro = new ValidacionSeguro();
+    public Seguro() {
+    }
 
-    public Double Seguro(String nombreAsegurado, int edadAsegurado, String beneficiario,
-                  double montoCobertura, String tipoPoliza, int duracionPoliza, boolean fumador,
-                  boolean enfermedadesPreexistentes, String compañiaSeguros, String numeroPoliza) {
+    public Seguro(String nombreAsegurado, int edadAsegurado, String beneficiario, double montoCobertura, String tipoPoliza, int duracionPoliza, boolean fumador, boolean enfermedadesPreexistentes, String compañiaSeguros, LocalDate fechaInicioCobertura, String numeroPoliza) {
         this.nombreAsegurado = nombreAsegurado;
         this.edadAsegurado = edadAsegurado;
         this.beneficiario = beneficiario;
@@ -31,6 +34,129 @@ public class Seguro {
         this.fumador = fumador;
         this.enfermedadesPreexistentes = enfermedadesPreexistentes;
         this.compañiaSeguros = compañiaSeguros;
+        this.fechaInicioCobertura = fechaInicioCobertura;
+        this.numeroPoliza = numeroPoliza;
+    }
+
+    public String getNombreAsegurado()
+    {
+        return nombreAsegurado;
+    }
+
+    public void setNombreAsegurado(String nombreAsegurado)
+    {
+        try {
+            this.validacionSeguro.validarNombreAsegurado(nombreAsegurado);
+            this.nombreAsegurado = nombreAsegurado;
+        }catch (Exception error){
+            System.out.println(error.getMessage());
+        }
+    }
+
+    public int getEdadAsegurado() {
+        return edadAsegurado;
+    }
+
+    public void setEdadAsegurado(int edadAsegurado)
+    {
+        try {
+            this.validacionSeguro.validarEdadAsegurado(edadAsegurado);
+            this.edadAsegurado = edadAsegurado;
+
+        }catch (Exception error){
+            System.out.println(error.getMessage());
+        }
+    }
+
+    public String getBeneficiario() {
+        return beneficiario;
+    }
+
+    public void setBeneficiario(String beneficiario)
+    {
+        try {
+            this.validacionSeguro.validarBeneficiario(beneficiario);
+            this.beneficiario = beneficiario;
+        }catch (Exception error){
+            System.out.println(error.getMessage());
+        }
+    }
+
+    public double getMontoCobertura() {
+        return montoCobertura;
+    }
+
+    public void setMontoCobertura(double montoCobertura)
+    {
+        try
+        {
+            this.validacionSeguro.validarMontoCobertura(montoCobertura);
+            this.montoCobertura = montoCobertura;
+        }catch (Exception error)
+        {
+            System.out.println(error.getMessage());
+        }
+    }
+
+    public String getTipoPoliza() {
+        return tipoPoliza;
+    }
+
+    public void setTipoPoliza(String tipoPoliza) {
+        this.tipoPoliza = tipoPoliza;
+    }
+
+    public int getDuracionPoliza() {
+        return duracionPoliza;
+    }
+
+    public void setDuracionPoliza(int duracionPoliza) {
+        this.duracionPoliza = duracionPoliza;
+    }
+
+    public boolean isFumador() {
+        return fumador;
+    }
+
+    public void setFumador(boolean fumador) {
+        this.fumador = fumador;
+    }
+
+    public boolean isEnfermedadesPreexistentes() {
+        return enfermedadesPreexistentes;
+    }
+
+    public void setEnfermedadesPreexistentes(boolean enfermedadesPreexistentes) {
+        this.enfermedadesPreexistentes = enfermedadesPreexistentes;
+    }
+
+    public String getCompañiaSeguros() {
+        return compañiaSeguros;
+    }
+
+    public void setCompañiaSeguros(String compañiaSeguros) {
+        this.compañiaSeguros = compañiaSeguros;
+    }
+
+    public LocalDate getFechaInicioCobertura() {
+        return fechaInicioCobertura;
+    }
+
+    public void setFechaInicioCobertura(LocalDate fechaInicioCobertura)
+    {
+        try {
+            this.validacionSeguro.validarFechaInicioCobertura(fechaInicioCobertura.toString());
+            this.fechaInicioCobertura = fechaInicioCobertura;
+        }catch (Exception error){
+            System.out.println(error.getMessage());
+        }
+    }
+
+    public String getNumeroPoliza() {
+        return numeroPoliza;
+    }
+
+    public void setNumeroPoliza(String numeroPoliza) {
         this.numeroPoliza = numeroPoliza;
     }
 
@@ -40,13 +166,13 @@ public class Seguro {
 
 
         if (edadAsegurado < 30) {
-            primaFinal -= 100
+            primaFinal -= 100;
         } else if (edadAsegurado > 60) {
             primaFinal += 200;
         }
 
         // Aplicar ajustes basados en el monto de cobertura
-        if (montoCobertura > 1000000 {
+        if (montoCobertura > 1000000) {
             primaFinal += 300;
         }
 
